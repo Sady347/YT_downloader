@@ -19,8 +19,8 @@ def try_download_with_cookies(url: str, cookie_bytes: bytes) -> tuple[str, bytes
     Requires valid cookies. Tries progressive MP4 first (22/18), then DASH.
     Rotates player clients to avoid 403/SABR. Returns (filename, data).
     """
-    clients = ["android", "ios", "web_safari"]                     # rotate clients
-    formats = ["22/18", "137+140/136+140/135+140/134+140", "bv*+ba/b"]  # prog → DASH → best
+    clients = ["android", "ios", "web_safari"]                     
+    formats = ["22/18", "137+140/136+140/135+140/134+140", "bv*+ba/b"]  
 
     with tempfile.TemporaryDirectory() as tmp:
         outtmpl = str(Path(tmp) / "%(title).200s.%(ext)s")
@@ -42,8 +42,8 @@ def try_download_with_cookies(url: str, cookie_bytes: bytes) -> tuple[str, bytes
 
                     "extractor_args": {"youtube": {"player_client": [client]}},
                     "format": fmt,
-                    "merge_output_format": "mp4",      # try to keep MP4 container
-                    "source_address": "0.0.0.0",       # force IPv4
+                    "merge_output_format": "mp4",      
+                    "source_address": "0.0.0.0",       
                     "http_headers": {
                         "User-Agent": "Mozilla/5.0",
                         "Referer": "https://www.youtube.com/",
@@ -55,7 +55,7 @@ def try_download_with_cookies(url: str, cookie_bytes: bytes) -> tuple[str, bytes
                     with yt_dlp.YoutubeDL(opts) as ydl:
                         info = ydl.extract_info(url, download=True)
 
-                        # Resolve output path robustly
+                        
                         paths = [
                             d.get("filepath") or d.get("filename")
                             for d in (info.get("requested_downloads") or [])
