@@ -7,9 +7,6 @@ from pathlib import Path
 
 st.set_page_config(page_title="Omar's Video Downloader", layout="wide", initial_sidebar_state="collapsed")
 
-url = st.text_input("Enter video url:")
-
-
 url = st.text_input("Enter video URL:")
 cookies_up = st.file_uploader("Optional: upload cookies.txt (for age/region restricted videos)", type=["txt"])
 
